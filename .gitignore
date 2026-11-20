@@ -1,0 +1,62 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environment and cache
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Editors and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Datasets and local backups
+dataset/
+backups/
+
+
+# Private adaptive learning state
+results/adaptive_state/
+
+# Exclude experimental models but preserve production artifacts
+models/*.joblib
+!models/adaptive_model_29.joblib
+!models/scaler_29.joblib
+
+models_v3_grouped/*.joblib
+!models_v3_grouped/random_forest_40_features.joblib
+!models_v3_grouped/random_forest_40_features_features.joblib
+
+project_file_inventory.csv
+
+
+# Individual URL-level evaluation data - keep private
+results/metrics/validation_false_positives.csv
+results/metrics/validation_false_negatives.csv
+
+results/metrics_v3_grouped/final_test_predictions_v3.csv
+results/metrics_v3_grouped/source_membership_predictions_v3.csv
+results/metrics_v3_grouped/validation_probabilities_v3.csv
+results/metrics_v3_grouped/error_analysis_v3/
+
+results/stream/stream_predictions.csv
+
+# Old adaptive model backups
+models/backup_before_v3/
+
+# Individual URLs used in the FRSC case study
+results/metrics/frsc_case_study_predictions.csv
+results/metrics/enhanced_frsc_case_study.csv
+
+# Archived model backups
+models/backup_before_v3/

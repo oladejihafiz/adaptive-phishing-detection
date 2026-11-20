@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Set the document's character encoding -->
+  <meta charset="UTF-8">
+
+  <!-- Make the popup layout responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title of the Chrome extension popup -->
+  <title>Adaptive Phishing Detector</title>
+
+  <style>
+    /* =====================================================
+       1. GLOBAL STYLES
+       Define the popup's dimensions, font and dark theme.
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 370px;
+      margin: 0;
+      background: #0b1220;
+      color: #e2e8f0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    /* =====================================================
+       2. HEADER AND APPLICATION BRANDING
+    ===================================================== */
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .logo {
+      background: #1d4ed8;
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+
+    h1 {
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* =====================================================
+       3. RESULT CARDS
+       Shared styling for all detection components.
+    ===================================================== */
+
+    .card {
+      background: #172235;
+      border: 1px solid #29374c;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+
+    .label {
+      color: #94a3b8;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Allow long URLs to wrap instead of overflowing */
+    #url {
+      font-size: 12px;
+      margin-top: 8px;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       4. STATUS BADGES
+       Different colors indicate detection outcomes.
+    ===================================================== */
+
+    .badge {
+      font-size: 10px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #334155;
+      color: #cbd5e1;
+      white-space: nowrap;
+    }
+
+    /* Green badge: model did not flag the URL */
+    .badge.safe {
+      background: #14532d;
+      color: #bbf7d0;
+    }
+
+    /* Red badge: potential phishing or known threat */
+    .badge.danger {
+      background: #7f1d1d;
+      color: #fecaca;
+    }
+
+    /* Yellow badge: disagreement or unavailable check */
+    .badge.warning {
+      background: #78350f;
+      color: #fde68a;
+    }
+
+    /* =====================================================
+       5. RANDOM FOREST PROBABILITY DISPLAY
+    ===================================================== */
+
+    .score {
+      font-size: 29px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .description {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .progress {
+      height: 7px;
+      background: #334155;
+      border-radius: 10px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+
+    /* JavaScript updates the width of this bar */
+    #progressFill {
+      width: 0%;
+      height: 100%;
+      background: #3b82f6;
+      transition: width 0.3s;
+    }
+
+    /* =====================================================
+       6. ADAPTIVE LEARNING STATISTICS
+    ===================================================== */
+
+    .learning-stat {
+      margin-top: 10px;
+    }
+
+    .drift-stat {
+      margin-top: 5px;
+    }
+
+    /* =====================================================
+       7. OVERALL SECURITY ASSESSMENT
+    ===================================================== */
+
+    .overall {
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #1e293b;
+      border: 1px solid #334155;
+    }
+
+    .overall.safe {
+      background: #052e20;
+      border-color: #166534;
+    }
+
+    .overall.danger {
+      background: #450a0a;
+      border-color: #991b1b;
+    }
+
+    .overall.warning {
+      background: #422006;
+      border-color: #92400e;
+    }
+
+    #overallTitle {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    /* =====================================================
+       8. SCAN BUTTON
+    ===================================================== */
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 13px;
+      border-radius: 9px;
+      background: #2563eb;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    /* Prevent repeated clicks while a scan is running */
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    /* =====================================================
+       9. FOOTER
+    ===================================================== */
+
+    .footer {
+      margin-top: 15px;
+      font-size: 10px;
+      line-height: 1.6;
+      text-align: center;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main container for the extension popup -->
+  <div class="container">
+
+    <!-- =================================================
+         1. EXTENSION HEADER
+    ================================================== -->
+
+    <div class="header">
+      <div class="logo">🛡️</div>
+
+      <div>
+        <h1>Phishing Detector</h1>
+
+        <div class="subtitle">
+          Adaptive Security Dashboard
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================
+         2. CURRENT WEBSITE
+         Displays the URL retrieved from the active tab.
+    ================================================== -->
+
+    <div class="card">
+      <div class="label">Current Website</div>
+
+      <div id="url">
+        Waiting for URL...
+      </div>
+    </div>
+
+    <!-- =================================================
+         3. RANDOM FOREST MODEL
+         Displays the static model's phishing prediction
+         and estimated phishing probability.
+    ================================================== -->
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          🧠 Enhanced Random Forest
+        </span>
+
+        <!-- Updated with the static model's classification -->
+        <span id="mlBadge" class="badge">
+          Pending
+        </span>
+      </div>
+
+      <!-- Estimated probability of the phishing class -->
+      <div id="probability" class="score">
+        --
+      </div>
+
+      <div class="description">
+        Estimated phishing probability
+      </div>
+
+      <!-- Visual representation of the probability -->
+      <div class="progress">
+        <div id="progressFill"></div>
+      </div>
+
+      <!-- Explanation of the static model's prediction -->
+      <div id="mlDescription" class="description">
+        Awaiting Random Forest prediction...
+      </div>
+    </div>
+
+    <!-- =================================================
+         4. ADAPTIVE PASSIVE-AGGRESSIVE MODEL
+         Displays the adaptive model's classification,
+         verified learning updates and ADWIN drift alerts.
+    ================================================== -->
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          ⚡ Adaptive Model
+        </span>
+
+        <!-- Updated with the adaptive model's classification -->
+        <span id="adaptiveBadge" class="badge">
+          Pending
+        </span>
+      </div>
+
+      <!-- Adaptive model prediction explanation -->
+      <div id="adaptiveDescription" class="description">
+        Awaiting adaptive model prediction...
+      </div>
+
+      <!-- Number of incremental learning updates -->
+      <div
+        id="learningStatus"
+        class="description learning-stat"
+      >
+        Learning updates: --
+      </div>
+
+      <!-- Number of ADWIN drift detections -->
+      <div
+        id="driftStatus"
+        class="description drift-stat"
+      >
+        ADWIN drift events: --
+      </div>
+    </div>
+
+    <!-- =================================================
+         5. MODEL AGREEMENT
+         Compares Random Forest and Passive-Aggressive
+         predictions for the same URL.
+    ================================================== -->
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          🔍 Model Agreement
+        </span>
+
+        <!-- Displays Agree, Disagree or Unavailable -->
+        <span id="agreementBadge" class="badge">
+          Pending
+        </span>
+      </div>
+
+      <!-- Explains whether both models agree -->
+      <div id="agreementDescription" class="description">
+        Awaiting comparison between both models...
+      </div>
+    </div>
+
+    <!-- =================================================
+         6. GOOGLE SAFE BROWSING
+         Checks whether the URL matches a known threat
+         reported by Google's threat-intelligence service.
+    ================================================== -->
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          🛡️ Google Safe Browsing
+        </span>
+
+        <!-- Displays threat lookup status -->
+        <span id="threatBadge" class="badge">
+          Pending
+        </span>
+      </div>
+
+      <!-- Explains the result of the threat lookup -->
+      <div id="threatDescription" class="description">
+        Awaiting threat intelligence...
+      </div>
+    </div>
+
+    <!-- =================================================
+         7. OVERALL SECURITY ASSESSMENT
+         Displays the final warning based on the current
+         backend decision policy.
+    ================================================== -->
+
+    <div id="overall" class="overall">
+      <div id="overallTitle">
+        Awaiting security assessment
+      </div>
+
+      <div id="overallDescription" class="description">
+        Scan the website to view the results.
+      </div>
+    </div>
+
+    <!-- =================================================
+         8. MANUAL WEBSITE SCAN BUTTON
+         The click event is handled by popup.js.
+    ================================================== -->
+
+    <button id="checkBtn">
+      ↻ Scan Website
+    </button>
+
+    <!-- =================================================
+         9. SECURITY DISCLAIMER
+    ================================================== -->
+
+    <div class="footer">
+      Experimental phishing detection system.
+      A negative result does not guarantee website safety.
+    </div>
+
+  </div>
+
+  <!-- Load the JavaScript that communicates with FastAPI -->
+  <script src="popup.js"></script>
+</body>
+
+</html>

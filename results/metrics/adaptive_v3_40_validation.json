@@ -1,0 +1,107 @@
+{
+    "dataset": "processed_v3_grouped",
+    "split_method": "StratifiedGroupKFold",
+    "domain_disjoint": true,
+    "feature_count": 40,
+    "features": [
+        "url_length",
+        "hostname_length",
+        "path_length",
+        "num_dots",
+        "num_hyphens",
+        "num_digits",
+        "num_at",
+        "num_question",
+        "num_equals",
+        "num_slashes",
+        "is_https",
+        "has_ip_host",
+        "num_host_parts",
+        "has_punycode",
+        "suspicious_words",
+        "hostname_digits",
+        "path_digits",
+        "hostname_digit_ratio",
+        "url_digit_ratio",
+        "hostname_hyphens",
+        "path_hyphens",
+        "query_length",
+        "has_fragment",
+        "has_percent_encoding",
+        "has_explicit_port",
+        "approx_subdomain_depth",
+        "path_segments",
+        "hostname_suspicious_words",
+        "path_suspicious_words",
+        "url_entropy",
+        "hostname_entropy",
+        "registered_domain_entropy",
+        "registered_domain_length",
+        "suffix_length",
+        "subdomain_length",
+        "subdomain_label_count",
+        "embedded_http_in_path",
+        "embedded_http_in_query",
+        "registered_domain_digit_ratio",
+        "registered_domain_hyphen_ratio"
+    ],
+    "classifier": "PassiveAggressiveClassifier",
+    "parameters": {
+        "C": 0.1,
+        "max_iter": 1000,
+        "random_state": 42,
+        "batch_size": 5000,
+        "training_passes": 1
+    },
+    "training_records": 850992,
+    "validation_records": 170198,
+    "training_class_distribution": {
+        "0": 623621,
+        "1": 227371
+    },
+    "validation_class_distribution": {
+        "0": 124724,
+        "1": 45474
+    },
+    "metrics": {
+        "accuracy": 0.8228298804921327,
+        "precision": 0.7524886281231459,
+        "recall": 0.5020231340986058,
+        "f1_score": 0.6022529414868358,
+        "false_positive_rate": 0.06020493249093999,
+        "false_negative_rate": 0.49797686590139423
+    },
+    "confusion_matrix": {
+        "true_negative": 117215,
+        "false_positive": 7509,
+        "false_negative": 22645,
+        "true_positive": 22829
+    },
+    "classification_report": {
+        "legitimate": {
+            "precision": 0.8380880880880881,
+            "recall": 0.9397950675090601,
+            "f1-score": 0.8860324131466756,
+            "support": 124724.0
+        },
+        "phishing": {
+            "precision": 0.7524886281231459,
+            "recall": 0.5020231340986058,
+            "f1-score": 0.6022529414868358,
+            "support": 45474.0
+        },
+        "accuracy": 0.8228298804921327,
+        "macro avg": {
+            "precision": 0.7952883581056169,
+            "recall": 0.7209091008038329,
+            "f1-score": 0.7441426773167557,
+            "support": 170198.0
+        },
+        "weighted avg": {
+            "precision": 0.8152173737292485,
+            "recall": 0.8228298804921327,
+            "f1-score": 0.8102113829685328,
+            "support": 170198.0
+        }
+    }
+}

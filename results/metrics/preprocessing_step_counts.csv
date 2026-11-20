@@ -1,0 +1,26 @@
+step,count
+dataset_1.csv: raw rows,64280
+dataset_1.csv: rows with unmapped/missing label,0
+dataset_1.csv: rows with missing/invalid URL,8
+dataset_1.csv: usable rows (what prepare_data.py prints),64272
+"dataset_1.csv: exact (url,label) duplicates within this file",0
+dataset_2.csv: raw rows,450176
+dataset_2.csv: rows with unmapped/missing label,0
+dataset_2.csv: rows with missing/invalid URL,567
+dataset_2.csv: usable rows (what prepare_data.py prints),449609
+"dataset_2.csv: exact (url,label) duplicates within this file",0
+dataset_4.csv: raw rows,549846
+dataset_4.csv: rows with unmapped/missing label,0
+dataset_4.csv: rows with missing/invalid URL,2148
+dataset_4.csv: usable rows (what prepare_data.py prints),547698
+"dataset_4.csv: exact (url,label) duplicates within this file",41536
+Sum of usable rows over the three files,1061579
+"Removed by drop_duplicates(url,label): total",106692
+  of which duplicates inside a single file,41536
+  of which duplicates across different files,65156
+Conflicting-label URLs (distinct URLs),4
+Rows removed because their URL has conflicting labels,8
+Removed by final drop_duplicates(url),0
+Rows removed because the URL is in dataset_5 (FRSC),0
+Final processed corpus (before the 70:15:15 split),954879
+Total reduction from the sum of usable rows,106700

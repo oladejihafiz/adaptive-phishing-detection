@@ -1,0 +1,96 @@
+{
+    "dataset": "processed_v3_grouped",
+    "split_method": "StratifiedGroupKFold",
+    "domain_disjoint": true,
+    "feature_count": 29,
+    "features": [
+        "url_length",
+        "hostname_length",
+        "path_length",
+        "num_dots",
+        "num_hyphens",
+        "num_digits",
+        "num_at",
+        "num_question",
+        "num_equals",
+        "num_slashes",
+        "is_https",
+        "has_ip_host",
+        "num_host_parts",
+        "has_punycode",
+        "suspicious_words",
+        "hostname_digits",
+        "path_digits",
+        "hostname_digit_ratio",
+        "url_digit_ratio",
+        "hostname_hyphens",
+        "path_hyphens",
+        "query_length",
+        "has_fragment",
+        "has_percent_encoding",
+        "has_explicit_port",
+        "approx_subdomain_depth",
+        "path_segments",
+        "hostname_suspicious_words",
+        "path_suspicious_words"
+    ],
+    "classifier": "PassiveAggressiveClassifier",
+    "parameters": {
+        "C": 0.1,
+        "max_iter": 1000,
+        "random_state": 42,
+        "batch_size": 5000,
+        "training_passes": 1
+    },
+    "training_records": 850992,
+    "validation_records": 170198,
+    "training_class_distribution": {
+        "0": 623621,
+        "1": 227371
+    },
+    "validation_class_distribution": {
+        "0": 124724,
+        "1": 45474
+    },
+    "metrics": {
+        "accuracy": 0.8236171987919952,
+        "precision": 0.779356471438901,
+        "recall": 0.4740511061265778,
+        "f1_score": 0.5895206060108842,
+        "false_positive_rate": 0.04893204194862256,
+        "false_negative_rate": 0.5259488938734221
+    },
+    "confusion_matrix": {
+        "true_negative": 118621,
+        "false_positive": 6103,
+        "false_negative": 23917,
+        "true_positive": 21557
+    },
+    "classification_report": {
+        "legitimate": {
+            "precision": 0.8322061485358291,
+            "recall": 0.9510679580513774,
+            "f1-score": 0.8876757638571888,
+            "support": 124724.0
+        },
+        "phishing": {
+            "precision": 0.779356471438901,
+            "recall": 0.4740511061265778,
+            "f1-score": 0.5895206060108842,
+            "support": 45474.0
+        },
+        "accuracy": 0.8236171987919952,
+        "macro avg": {
+            "precision": 0.805781309987365,
+            "recall": 0.7125595320889776,
+            "f1-score": 0.7385981849340365,
+            "support": 170198.0
+        },
+        "weighted avg": {
+            "precision": 0.8180856170589276,
+            "recall": 0.8236171987919952,
+            "f1-score": 0.8080137957500262,
+            "support": 170198.0
+        }
+    }
+}

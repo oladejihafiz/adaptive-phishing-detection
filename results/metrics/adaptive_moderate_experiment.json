@@ -1,0 +1,118 @@
+{
+    "experiment": "moderate_phishing_sample_weight",
+    "dataset": "processed_v3_grouped",
+    "features": [
+        "url_length",
+        "hostname_length",
+        "path_length",
+        "num_dots",
+        "num_hyphens",
+        "num_digits",
+        "num_at",
+        "num_question",
+        "num_equals",
+        "num_slashes",
+        "is_https",
+        "has_ip_host",
+        "num_host_parts",
+        "has_punycode",
+        "suspicious_words"
+    ],
+    "phishing_sample_weight": 1.25,
+    "legitimate_sample_weight": 1.0,
+    "classifier": "SGDClassifier",
+    "learning_rate": "pa1",
+    "metrics": {
+        "accuracy": 0.7137040388253681,
+        "precision": 0.46164548305704245,
+        "recall": 0.43050974183049656,
+        "f1_score": 0.44553430206756867,
+        "false_positive_rate": 0.18304416150861103,
+        "false_negative_rate": 0.5694902581695035
+    },
+    "confusion_matrix": {
+        "true_negative": 101894,
+        "false_positive": 22830,
+        "false_negative": 25897,
+        "true_positive": 19577
+    },
+    "threshold_results": [
+        {
+            "threshold": -1.0,
+            "precision": 0.32320452037685976,
+            "recall": 0.5861591238949729,
+            "f1_score": 0.41666341005900975,
+            "false_positive_rate": 0.4475161155832077
+        },
+        {
+            "threshold": -0.75,
+            "precision": 0.33230063571256135,
+            "recall": 0.5448607995777807,
+            "f1_score": 0.4128261521543537,
+            "false_positive_rate": 0.3991613482569514
+        },
+        {
+            "threshold": -0.5,
+            "precision": 0.3582827042901316,
+            "recall": 0.5070589787570919,
+            "f1_score": 0.4198814542342326,
+            "false_positive_rate": 0.33112311984862575
+        },
+        {
+            "threshold": -0.25,
+            "precision": 0.39708836301723643,
+            "recall": 0.4564586357039187,
+            "f1_score": 0.42470868671161266,
+            "false_positive_rate": 0.25268593053462046
+        },
+        {
+            "threshold": 0.0,
+            "precision": 0.46164548305704245,
+            "recall": 0.43050974183049656,
+            "f1_score": 0.44553430206756867,
+            "false_positive_rate": 0.18304416150861103
+        },
+        {
+            "threshold": 0.25,
+            "precision": 0.48760745933077637,
+            "recall": 0.40537449971412237,
+            "f1_score": 0.44270464342751475,
+            "false_positive_rate": 0.1553109265257689
+        },
+        {
+            "threshold": 0.5,
+            "precision": 0.5180861708256269,
+            "recall": 0.37575317763997007,
+            "f1_score": 0.43558727933210123,
+            "false_positive_rate": 0.12743337288733525
+        },
+        {
+            "threshold": 0.75,
+            "precision": 0.5596630955737243,
+            "recall": 0.3492325284778115,
+            "f1_score": 0.4300880162491537,
+            "false_positive_rate": 0.10018120008979828
+        },
+        {
+            "threshold": 1.0,
+            "precision": 0.5867316609202236,
+            "recall": 0.325570655759335,
+            "f1_score": 0.41877041877041876,
+            "false_positive_rate": 0.08360860780603573
+        },
+        {
+            "threshold": 1.5,
+            "precision": 0.6448120605048818,
+            "recall": 0.2802920350090161,
+            "f1_score": 0.39073588694226025,
+            "false_positive_rate": 0.05629229338379141
+        },
+        {
+            "threshold": 2.0,
+            "precision": 0.6868751194039355,
+            "recall": 0.23719048247350133,
+            "f1_score": 0.3526161792830639,
+            "false_positive_rate": 0.03942304608575735
+        }
+    ]
+}

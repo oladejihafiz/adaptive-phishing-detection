@@ -1,0 +1,82 @@
+{
+    "dataset": "processed_v3_grouped",
+    "split_method": "StratifiedGroupKFold",
+    "domain_disjoint": true,
+    "feature_count": 15,
+    "features": [
+        "url_length",
+        "hostname_length",
+        "path_length",
+        "num_dots",
+        "num_hyphens",
+        "num_digits",
+        "num_at",
+        "num_question",
+        "num_equals",
+        "num_slashes",
+        "is_https",
+        "has_ip_host",
+        "num_host_parts",
+        "has_punycode",
+        "suspicious_words"
+    ],
+    "classifier": "PassiveAggressiveClassifier",
+    "parameters": {
+        "C": 0.1,
+        "max_iter": 1000,
+        "random_state": 42,
+        "batch_size": 5000,
+        "training_passes": 1
+    },
+    "training_records": 850992,
+    "validation_records": 170198,
+    "training_class_distribution": {
+        "0": 623621,
+        "1": 227371
+    },
+    "validation_class_distribution": {
+        "0": 124724,
+        "1": 45474
+    },
+    "metrics": {
+        "accuracy": 0.7710313869728199,
+        "precision": 0.7319874447139392,
+        "recall": 0.2256454237586313,
+        "f1_score": 0.3449539433873462,
+        "false_positive_rate": 0.030122510503191046,
+        "false_negative_rate": 0.7743545762413687
+    },
+    "confusion_matrix": {
+        "true_negative": 120967,
+        "false_positive": 3757,
+        "false_negative": 35213,
+        "true_positive": 10261
+    },
+    "classification_report": {
+        "legitimate": {
+            "precision": 0.7745357920348316,
+            "recall": 0.969877489496809,
+            "f1-score": 0.8612693304474126,
+            "support": 124724.0
+        },
+        "phishing": {
+            "precision": 0.7319874447139392,
+            "recall": 0.2256454237586313,
+            "f1-score": 0.3449539433873462,
+            "support": 45474.0
+        },
+        "accuracy": 0.7710313869728199,
+        "macro avg": {
+            "precision": 0.7532616183743854,
+            "recall": 0.5977614566277202,
+            "f1-score": 0.6031116369173795,
+            "support": 170198.0
+        },
+        "weighted avg": {
+            "precision": 0.7631676000110107,
+            "recall": 0.7710313869728199,
+            "f1-score": 0.7233186734998018,
+            "support": 170198.0
+        }
+    }
+}

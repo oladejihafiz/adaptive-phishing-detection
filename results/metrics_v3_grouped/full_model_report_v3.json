@@ -1,0 +1,242 @@
+[
+  {
+    "model": "random_forest_15_features",
+    "feature_count": 15,
+    "threshold": 0.5,
+    "accuracy": 0.8837589160859705,
+    "precision": 0.7480591711405508,
+    "recall": 0.8518274178651537,
+    "f1_score": 0.7965781031504483,
+    "false_positive_rate": 0.10459895449151727,
+    "roc_auc": 0.9492760359686608,
+    "pr_auc": 0.9020182329703824,
+    "confusion_matrix": {
+      "true_negative": 111678,
+      "false_positive": 13046,
+      "false_negative": 6738,
+      "true_positive": 38736
+    },
+    "top_feature_importances": [
+      {
+        "feature": "path_length",
+        "importance": 0.14604270948021403
+      },
+      {
+        "feature": "num_digits",
+        "importance": 0.12995963843279232
+      },
+      {
+        "feature": "is_https",
+        "importance": 0.12140606334784816
+      },
+      {
+        "feature": "hostname_length",
+        "importance": 0.10620405235628076
+      },
+      {
+        "feature": "num_slashes",
+        "importance": 0.105382936455863
+      },
+      {
+        "feature": "url_length",
+        "importance": 0.07876371897722678
+      },
+      {
+        "feature": "num_dots",
+        "importance": 0.07057389485106909
+      },
+      {
+        "feature": "num_hyphens",
+        "importance": 0.06792277937673795
+      },
+      {
+        "feature": "num_host_parts",
+        "importance": 0.06702169486469448
+      },
+      {
+        "feature": "suspicious_words",
+        "importance": 0.06279456475195323
+      },
+      {
+        "feature": "num_equals",
+        "importance": 0.019279654673242105
+      },
+      {
+        "feature": "num_question",
+        "importance": 0.013259884103774145
+      },
+      {
+        "feature": "num_at",
+        "importance": 0.006607095016238736
+      },
+      {
+        "feature": "has_ip_host",
+        "importance": 0.004423164252650218
+      },
+      {
+        "feature": "has_punycode",
+        "importance": 0.00035814905941515985
+      }
+    ]
+  },
+  {
+    "model": "random_forest_29_features",
+    "feature_count": 29,
+    "threshold": 0.5,
+    "accuracy": 0.8975369863335645,
+    "precision": 0.7800643343789335,
+    "recall": 0.8585785283898492,
+    "f1_score": 0.8174404606124052,
+    "false_positive_rate": 0.08825887559731888,
+    "roc_auc": 0.9584553130044215,
+    "pr_auc": 0.9188569897760486,
+    "confusion_matrix": {
+      "true_negative": 113716,
+      "false_positive": 11008,
+      "false_negative": 6431,
+      "true_positive": 39043
+    },
+    "top_feature_importances": [
+      {
+        "feature": "is_https",
+        "importance": 0.11233274601527299
+      },
+      {
+        "feature": "path_length",
+        "importance": 0.10522607114112947
+      },
+      {
+        "feature": "num_slashes",
+        "importance": 0.07059694325928816
+      },
+      {
+        "feature": "hostname_length",
+        "importance": 0.06497036359414356
+      },
+      {
+        "feature": "hostname_digits",
+        "importance": 0.059235366647028845
+      },
+      {
+        "feature": "url_length",
+        "importance": 0.05588007758601385
+      },
+      {
+        "feature": "num_digits",
+        "importance": 0.05085392935733116
+      },
+      {
+        "feature": "path_hyphens",
+        "importance": 0.045080416160164526
+      },
+      {
+        "feature": "num_dots",
+        "importance": 0.043758695140477595
+      },
+      {
+        "feature": "suspicious_words",
+        "importance": 0.04108569166887433
+      },
+      {
+        "feature": "hostname_hyphens",
+        "importance": 0.04084842368358987
+      },
+      {
+        "feature": "hostname_digit_ratio",
+        "importance": 0.03897545194991056
+      },
+      {
+        "feature": "url_digit_ratio",
+        "importance": 0.03855272185893217
+      },
+      {
+        "feature": "path_segments",
+        "importance": 0.03670663482645407
+      },
+      {
+        "feature": "num_host_parts",
+        "importance": 0.03509380999585701
+      }
+    ]
+  },
+  {
+    "model": "random_forest_40_features",
+    "feature_count": 40,
+    "threshold": 0.5,
+    "accuracy": 0.9329839363564789,
+    "precision": 0.8636169576911583,
+    "recall": 0.8896732198618991,
+    "f1_score": 0.8764514731369151,
+    "false_positive_rate": 0.05122510503191046,
+    "roc_auc": 0.9781916141597563,
+    "pr_auc": 0.9562843456343205,
+    "confusion_matrix": {
+      "true_negative": 118335,
+      "false_positive": 6389,
+      "false_negative": 5017,
+      "true_positive": 40457
+    },
+    "top_feature_importances": [
+      {
+        "feature": "is_https",
+        "importance": 0.1218330959704169
+      },
+      {
+        "feature": "suffix_length",
+        "importance": 0.08493852287982011
+      },
+      {
+        "feature": "subdomain_length",
+        "importance": 0.07608709840179555
+      },
+      {
+        "feature": "path_length",
+        "importance": 0.0548675480588668
+      },
+      {
+        "feature": "hostname_digit_ratio",
+        "importance": 0.041056122250175985
+      },
+      {
+        "feature": "num_slashes",
+        "importance": 0.03986047964814108
+      },
+      {
+        "feature": "url_entropy",
+        "importance": 0.039438001066198346
+      },
+      {
+        "feature": "hostname_entropy",
+        "importance": 0.03850070313796554
+      },
+      {
+        "feature": "suspicious_words",
+        "importance": 0.0360635903155921
+      },
+      {
+        "feature": "hostname_digits",
+        "importance": 0.03396631058380293
+      },
+      {
+        "feature": "registered_domain_length",
+        "importance": 0.033248528249469715
+      },
+      {
+        "feature": "registered_domain_entropy",
+        "importance": 0.03312431845936912
+      },
+      {
+        "feature": "url_length",
+        "importance": 0.029637990766643925
+      },
+      {
+        "feature": "path_hyphens",
+        "importance": 0.029581896924400206
+      },
+      {
+        "feature": "hostname_length",
+        "importance": 0.027542473013424412
+      }
+    ]
+  }
+]
